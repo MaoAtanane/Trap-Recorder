@@ -729,7 +729,7 @@ function GameHeader({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 text-sm">
+        <div className="grid gap-2 sm:gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 text-sm">
           <div>
             <p className="text-sm font-medium text-slate-600">Fusil</p>
             <p className="text-sm">{gun?.name || "Non spécifié"}</p>
@@ -768,18 +768,18 @@ function ScoringGrid({
       <CardHeader className="pb-4">
         <CardTitle className="text-lg">Grille de Score</CardTitle>
         <CardDescription className="text-sm">
-          Cliquez plusieurs fois : Vide → 3pts (1er coup touché) → 2pts (1er
-          raté, 2ème touché) → 0pt (2 coups ratés) → Vide
+          Cliquez sur chaque case pour marquer vos coups : Vide → 3pts (1er
+          touché) → 2pts (1er raté, 2ème touché) → 0pt (2 ratés) → Vide
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6">
           {[1, 2, 3, 4, 5].map((station) => (
-            <div key={station} className="space-y-3">
+            <div key={station} className="space-y-3 sm:space-y-4">
               <h3 className="font-semibold text-base sm:text-lg">
                 Poste {station}
               </h3>
-              <div className="grid grid-cols-5 gap-2 sm:gap-3">
+              <div className="grid grid-cols-5 gap-2 sm:gap-3 lg:gap-4">
                 {game.shots
                   .filter((shot) => shot.station === station)
                   .map((shot, index) => {
@@ -819,15 +819,17 @@ function ShotButton({
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center p-1 border border-transparent hover:border-slate-200 rounded-lg transition-colors">
       <Button
         onClick={onUpdate}
-        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-lg font-bold text-base sm:text-lg ${getButtonColor()} touch-manipulation`}
+        className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-lg font-bold text-sm sm:text-base lg:text-lg ${getButtonColor()} touch-manipulation active:scale-95 transition-transform focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
       >
         {shot.score !== null ? shot.score : ""}
       </Button>
-      <p className="text-xs text-slate-600 mt-1">Coup {shotNumber}</p>
-      <div className="flex justify-center space-x-1 mt-1">
+      <p className="text-xs text-slate-600 mt-1.5 select-none">
+        Coup {shotNumber}
+      </p>
+      <div className="flex justify-center space-x-1 mt-1.5">
         {shot.firstShot === "hit" && (
           <CheckCircle className="h-3 w-3 text-green-600" />
         )}
@@ -865,9 +867,9 @@ function GameStats({ game }: { game: Game }) {
   const progressPercentage = Math.round((completeShots / totalShots) * 100);
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
       <Card>
-        <CardHeader className="pb-4">
+        <CardHeader className="pb-3 sm:pb-4">
           <CardTitle className="text-lg">Score Actuel</CardTitle>
         </CardHeader>
         <CardContent>
@@ -903,11 +905,11 @@ function GameStats({ game }: { game: Game }) {
       </Card>
 
       <Card>
-        <CardHeader className="pb-4">
+        <CardHeader className="pb-3 sm:pb-4">
           <CardTitle className="text-lg">Détail par Poste</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             {stationStats.map(({ station, score, hits }) => (
               <div key={station} className="flex justify-between items-center">
                 <span className="text-sm font-medium">Poste {station}</span>

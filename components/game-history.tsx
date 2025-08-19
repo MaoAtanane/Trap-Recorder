@@ -187,12 +187,12 @@ export default function GameHistory({ userId }: GameHistoryProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
             Game History & Analytics
           </h2>
-          <p className="text-slate-600">
+          <p className="text-sm sm:text-base text-slate-600">
             Track your performance and analyze trends over time
           </p>
         </div>
@@ -315,14 +315,19 @@ function GameFilters({
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center space-x-2">
-            <Filter className="h-5 w-5" />
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <CardTitle className="flex items-center space-x-2 text-base sm:text-lg">
+            <Filter className="h-4 w-4 sm:h-5 sm:w-5" />
             <span>Filters</span>
           </CardTitle>
           <div className="flex items-center space-x-2">
             {hasActiveFilters && (
-              <Button variant="outline" size="sm" onClick={onClearFilters}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onClearFilters}
+                className="text-xs sm:text-sm"
+              >
                 Clear All
               </Button>
             )}
@@ -330,11 +335,12 @@ function GameFilters({
               variant="outline"
               size="sm"
               onClick={() => setShowFilters(!showFilters)}
+              className="text-xs sm:text-sm"
             >
               {showFilters ? (
-                <ChevronUp className="h-4 w-4" />
+                <ChevronUp className="h-3 w-3 sm:h-4 sm:w-4" />
               ) : (
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4" />
               )}
             </Button>
           </div>
@@ -342,51 +348,55 @@ function GameFilters({
       </CardHeader>
       {showFilters && (
         <CardContent className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-2">
-              <Label>Date From</Label>
+              <Label className="text-xs sm:text-sm">Date From</Label>
               <Input
                 type="date"
                 value={filters.dateFrom}
                 onChange={(e) => updateFilter("dateFrom", e.target.value)}
+                className="text-xs sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Date To</Label>
+              <Label className="text-xs sm:text-sm">Date To</Label>
               <Input
                 type="date"
                 value={filters.dateTo}
                 onChange={(e) => updateFilter("dateTo", e.target.value)}
+                className="text-xs sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Min Score</Label>
+              <Label className="text-xs sm:text-sm">Min Score</Label>
               <Input
                 type="number"
                 placeholder="0"
                 value={filters.minScore}
                 onChange={(e) => updateFilter("minScore", e.target.value)}
+                className="text-xs sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Max Score</Label>
+              <Label className="text-xs sm:text-sm">Max Score</Label>
               <Input
                 type="number"
                 placeholder="75"
                 value={filters.maxScore}
                 onChange={(e) => updateFilter("maxScore", e.target.value)}
+                className="text-xs sm:text-sm"
               />
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-2">
-              <Label>Gun</Label>
+              <Label className="text-xs sm:text-sm">Gun</Label>
               <Select
                 value={filters.gunId}
                 onValueChange={(value) => updateFilter("gunId", value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="text-xs sm:text-sm">
                   <SelectValue placeholder="All guns" />
                 </SelectTrigger>
                 <SelectContent>
@@ -400,12 +410,12 @@ function GameFilters({
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Choke</Label>
+              <Label className="text-xs sm:text-sm">Choke</Label>
               <Select
                 value={filters.chokeId}
                 onValueChange={(value) => updateFilter("chokeId", value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="text-xs sm:text-sm">
                   <SelectValue placeholder="All chokes" />
                 </SelectTrigger>
                 <SelectContent>
@@ -419,12 +429,12 @@ function GameFilters({
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Ammunition</Label>
+              <Label className="text-xs sm:text-sm">Ammunition</Label>
               <Select
                 value={filters.ammunitionId}
                 onValueChange={(value) => updateFilter("ammunitionId", value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="text-xs sm:text-sm">
                   <SelectValue placeholder="All ammunition" />
                 </SelectTrigger>
                 <SelectContent>
@@ -438,11 +448,12 @@ function GameFilters({
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Club</Label>
+              <Label className="text-xs sm:text-sm">Club</Label>
               <Input
                 placeholder="Filter by club name"
                 value={filters.club}
                 onChange={(e) => updateFilter("club", e.target.value)}
+                className="text-xs sm:text-sm"
               />
             </div>
           </div>
@@ -491,7 +502,7 @@ function GameList({
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <CardTitle>Games ({games.length})</CardTitle>
           <div className="flex items-center space-x-2">
             <Label className="text-sm">Sort by:</Label>
@@ -522,33 +533,41 @@ function GameList({
             return (
               <div
                 key={game.id}
-                className="flex items-center justify-between p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors gap-3"
               >
-                <div className="flex-1 space-y-1">
-                  <div className="flex items-center space-x-3">
-                    <h4 className="font-semibold text-slate-900">
+                <div className="flex-1 space-y-2 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                    <h4 className="font-semibold text-slate-900 text-sm sm:text-base">
                       {new Date(game.date).toLocaleDateString()}
                     </h4>
-                    <Badge variant="outline">{game.club}</Badge>
+                    <Badge variant="outline" className="w-fit text-xs">
+                      {game.club}
+                    </Badge>
                   </div>
-                  <div className="flex items-center space-x-4 text-sm text-slate-600">
-                    <span>{gun?.name || "Unknown Gun"}</span>
-                    <span>•</span>
-                    <span>{choke?.name || "Unknown Choke"}</span>
-                    <span>•</span>
-                    <span>{ammo?.name || "Unknown Ammo"}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs sm:text-sm text-slate-600">
+                    <span className="truncate">
+                      {gun?.name || "Unknown Gun"}
+                    </span>
+                    <span className="hidden sm:inline">•</span>
+                    <span className="truncate">
+                      {choke?.name || "Unknown Choke"}
+                    </span>
+                    <span className="hidden sm:inline">•</span>
+                    <span className="truncate">
+                      {ammo?.name || "Unknown Ammo"}
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">
+                <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 min-w-0">
+                  <div className="text-center min-w-0">
+                    <div className="text-xl sm:text-2xl font-bold text-blue-600">
                       {game.totalScore}
                     </div>
                     <div className="text-xs text-slate-600">Score</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-lg font-semibold">
+                  <div className="text-center min-w-0">
+                    <div className="text-base sm:text-lg font-semibold">
                       {game.hitCount}/25
                     </div>
                     <div className="text-xs text-slate-600">{hitRate}%</div>
@@ -559,23 +578,24 @@ function GameList({
                         variant="outline"
                         size="sm"
                         onClick={() => setSelectedGame(game)}
+                        className="text-xs sm:text-sm"
                       >
-                        <Eye className="h-4 w-4 mr-2" />
-                        View
+                        <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                        <span className="hidden sm:inline">View</span>
+                        <span className="sm:hidden">Details</span>
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[90vh] w-[95vw] md:w-[90vw] lg:w-[80vw] !grid-rows-none !grid-cols-none flex flex-col h-[90vh]">
-                      <DialogHeader className="flex-shrink-0 pb-4">
-                        <DialogTitle>
+                    <DialogContent className="max-w-[95vw] w-full max-h-[90vh] h-[90vh] p-0 sm:p-6">
+                      <DialogHeader className="flex-shrink-0 pb-4 px-4 sm:px-0">
+                        <DialogTitle className="text-lg sm:text-xl">
                           Game Details -{" "}
                           {new Date(game.date).toLocaleDateString()}
                         </DialogTitle>
-                        <DialogDescription>{game.club}</DialogDescription>
+                        <DialogDescription className="text-sm sm:text-base">
+                          {game.club}
+                        </DialogDescription>
                       </DialogHeader>
-                      <div
-                        className="flex-1 overflow-y-auto min-h-0 pr-2"
-                        style={{ maxHeight: "calc(90vh - 120px)" }}
-                      >
+                      <div className="flex-1 overflow-y-auto min-h-0 px-4 sm:px-0 pb-4">
                         {selectedGame && (
                           <GameDetails
                             game={selectedGame}
@@ -629,12 +649,14 @@ function GameDetails({
   return (
     <div className="space-y-4">
       {/* Game Info */}
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Equipment Used</CardTitle>
+            <CardTitle className="text-base sm:text-lg">
+              Equipment Used
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 text-sm sm:text-base">
             <div>
               <strong>Gun:</strong> {gun?.name || "Unknown"}
             </div>
@@ -652,9 +674,11 @@ function GameDetails({
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Performance Summary</CardTitle>
+            <CardTitle className="text-base sm:text-lg">
+              Performance Summary
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 text-sm sm:text-base">
             <div>
               <strong>Total Score:</strong> {game.totalScore}/75
             </div>
@@ -676,26 +700,32 @@ function GameDetails({
       {/* Station Breakdown */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Station Breakdown</CardTitle>
+          <CardTitle className="text-base sm:text-lg">
+            Station Breakdown
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {stationStats.map(({ station, score, hits, shots }) => (
-              <div key={station} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">Station {station}</h4>
-                  <div className="flex items-center space-x-3">
+              <div key={station} className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <h4 className="font-semibold text-sm sm:text-base">
+                    Station {station}
+                  </h4>
+                  <div className="flex items-center gap-3">
                     <Badge variant="outline" className="text-xs">
                       {hits}/5 hits
                     </Badge>
-                    <span className="font-bold">{score}/15</span>
+                    <span className="font-bold text-sm sm:text-base">
+                      {score}/15
+                    </span>
                   </div>
                 </div>
-                <div className="grid grid-cols-5 gap-1.5">
+                <div className="grid grid-cols-5 gap-1 sm:gap-1.5">
                   {shots.map((shot, index) => (
                     <div
                       key={index}
-                      className={`p-1.5 text-center text-xs font-medium rounded ${
+                      className={`p-1 sm:p-1.5 text-center text-xs font-medium rounded ${
                         shot.score === 3
                           ? "bg-green-100 text-green-800"
                           : shot.score === 2
@@ -774,45 +804,51 @@ function PerformanceAnalytics({ games }: { games: Game[] }) {
   return (
     <div className="space-y-6">
       {/* Stats Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-5">
         <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">
+          <CardContent className="p-3 sm:p-4 text-center">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">
               {stats?.totalGames}
             </div>
-            <div className="text-sm text-slate-600">Total Games</div>
+            <div className="text-xs sm:text-sm text-slate-600">Total Games</div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">
+          <CardContent className="p-3 sm:p-4 text-center">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">
               {stats?.avgScore}
             </div>
-            <div className="text-sm text-slate-600">Average Score</div>
+            <div className="text-xs sm:text-sm text-slate-600">
+              Average Score
+            </div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">
+          <CardContent className="p-3 sm:p-4 text-center">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">
               {stats?.avgHitRate}%
             </div>
-            <div className="text-sm text-slate-600">Average Hit Rate</div>
+            <div className="text-xs sm:text-sm text-slate-600">
+              Average Hit Rate
+            </div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">
+          <CardContent className="p-3 sm:p-4 text-center">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">
               {stats?.bestScore}
             </div>
-            <div className="text-sm text-slate-600">Best Score</div>
+            <div className="text-xs sm:text-sm text-slate-600">Best Score</div>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">
+        <Card className="col-span-2 lg:col-span-1">
+          <CardContent className="p-3 sm:p-4 text-center">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">
               {stats?.recentAvg}
             </div>
-            <div className="text-sm text-slate-600">Recent Average</div>
+            <div className="text-xs sm:text-sm text-slate-600">
+              Recent Average
+            </div>
             {stats?.improvement && (
               <div
                 className={`text-xs ${
@@ -831,13 +867,15 @@ function PerformanceAnalytics({ games }: { games: Game[] }) {
       {/* Performance Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Score Progression</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-base sm:text-lg">
+            Score Progression
+          </CardTitle>
+          <CardDescription className="text-sm">
             Your last 20 games performance trend
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-60 sm:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -866,11 +904,15 @@ function PerformanceAnalytics({ games }: { games: Game[] }) {
       {/* Hit Rate Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Hit Rate Progression</CardTitle>
-          <CardDescription>Percentage of targets hit over time</CardDescription>
+          <CardTitle className="text-base sm:text-lg">
+            Hit Rate Progression
+          </CardTitle>
+          <CardDescription className="text-sm">
+            Percentage of targets hit over time
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-80">
+          <div className="h-60 sm:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -1014,28 +1056,30 @@ function EquipmentStatsTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-base sm:text-lg">{title}</CardTitle>
+        <CardDescription className="text-sm">
           Performance comparison across different equipment
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b">
-                <th className="text-left p-2">Equipment</th>
-                <th className="text-center p-2">Games</th>
-                <th className="text-center p-2">Avg Score</th>
-                <th className="text-center p-2">Avg Hit Rate</th>
-                <th className="text-center p-2">Total Score</th>
-                <th className="text-center p-2">Total Hits</th>
+                <th className="text-left p-2 font-medium">Equipment</th>
+                <th className="text-center p-2 font-medium">Games</th>
+                <th className="text-center p-2 font-medium">Avg Score</th>
+                <th className="text-center p-2 font-medium">Avg Hit Rate</th>
+                <th className="text-center p-2 font-medium">Total Score</th>
+                <th className="text-center p-2 font-medium">Total Hits</th>
               </tr>
             </thead>
             <tbody>
               {sortedStats.map((stat) => (
                 <tr key={stat.id} className="border-b hover:bg-slate-50">
-                  <td className="p-2 font-medium">{stat.name}</td>
+                  <td className="p-2 font-medium truncate max-w-24 sm:max-w-none">
+                    {stat.name}
+                  </td>
                   <td className="p-2 text-center">{stat.games}</td>
                   <td className="p-2 text-center font-semibold">
                     {stat.avgScore}
