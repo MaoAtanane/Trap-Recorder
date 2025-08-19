@@ -155,3 +155,43 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-neutral-500);
 }
+
+/* Scrollbar utilities for mobile tabs */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Mobile tabs specific styles */
+.mobile-tabs-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.mobile-tabs-container > * {
+  scroll-snap-align: start;
+}
+
+/* Mobile tab trigger improvements */
+.mobile-tabs-container [data-slot="mobile-tabs-trigger"] {
+  touch-action: manipulation; /* Optimize for touch */
+  user-select: none; /* Prevent text selection on touch */
+}
+
+/* Active state animations */
+.mobile-tabs-container [data-slot="mobile-tabs-trigger"][data-state="active"] {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effects for non-touch devices */
+@media (hover: hover) {
+  .mobile-tabs-container [data-slot="mobile-tabs-trigger"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
